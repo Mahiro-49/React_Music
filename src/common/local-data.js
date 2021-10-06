@@ -1,7 +1,7 @@
 export const headerLinks = [
   {
     title: "发现音乐",
-    link: "/"
+    link: "/discovery"
   },
   {
     title: "我的音乐",
@@ -65,4 +65,32 @@ export const footerImages = [
   {
     link: "https://music.163.com/uservideo#/plan"
   }
+]
+
+export const discoverMeny = [
+  {
+    title: "推荐",
+    link: "/discovery/recommend"
+  },
+  {
+    title: "排行榜",
+    link: "/discovery/toplist"
+  },
+  {
+    title: "歌单",
+    link: "/discovery/playlist"
+  },
+  {
+    title: "主播电台",
+    link: "/discovery/diantai"
+  },
+  {
+    title: "歌手",
+    link: "/discovery/artist"
+  },
+  {
+    title: "新碟上架",
+    link: "/discovery/album"
+  },
+
 ]

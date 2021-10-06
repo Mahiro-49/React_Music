@@ -19,7 +19,7 @@ export default memo(function MJAppHeader() {
     // 前三个为路由跳转
     if (index < 3) {
       return (
-        <NavLink to={item.link} exact="true">
+        <NavLink to={item.link}>
           {item.title}
           <i className="sprite_01 icon"></i>
         </NavLink>
@@ -34,7 +34,7 @@ export default memo(function MJAppHeader() {
     <HeaderWrapper>
       <div className="content wrap-v1">
         <HeaderLeft>
-          <a href="#/" className="logo sprite_01"></a>
+          <a href="#/" className="logo sprite_01"> </a>
           <div className="select-list">
             {
               headerLinks.map((item, index) => {

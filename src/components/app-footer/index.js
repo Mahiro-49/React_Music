@@ -42,7 +42,7 @@ export default memo(function MJAppFooter() {
             footerImages.map((item, index) => {
               return (
                 <li className="item" key={item.link}>
-                  <a className="link" href={item.link} rel="noopener noreferrer" target="_blank"></a>
+                  <a className="link" href={item.link} rel="noopener noreferrer" target="_blank"> </a>
                   <span className="title"></span>
                 </li>
               )
