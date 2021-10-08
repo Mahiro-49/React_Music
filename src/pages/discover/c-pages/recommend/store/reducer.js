@@ -9,6 +9,7 @@ const defaultState = Map({
   upList: {},
   newList: {},
   originList: {},
+  artistList: []
 })
 
 function reducer(state = defaultState, action) {
@@ -25,6 +26,8 @@ function reducer(state = defaultState, action) {
       return state.set("newList", action.newList);
     case actionTypes.CHANGE_ORIGIN_LIST:
       return state.set("originList", action.originList);
+    case actionTypes.CHANGE_ARTIST_LIST:
+      return state.set("artistList", action.artistList);
     default:
       return state;
   }

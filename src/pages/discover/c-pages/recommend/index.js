@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 
-import { 
+import {
   RecommendWraper,
   Content,
   RecommendLeft,
@@ -12,9 +12,12 @@ import MJHotRecommend from "./c-cpns/hot-recommend"
 import MJNewAlbum from "./c-cpns/new-album"
 import MJRanking from "./c-cpns/recommend-ranking"
 
+import MJHotAnchor from "./c-cpns/hot-anchor"
+import MJSinger from "./c-cpns/settle-singer"
+import MJLogin from "./c-cpns/user-login"
 
 function MJRecommend(props) {
-  
+
 
   return (
     <RecommendWraper>
@@ -25,7 +28,11 @@ function MJRecommend(props) {
           <MJNewAlbum />
           <MJRanking />
         </RecommendLeft>
-        <RecommendRight></RecommendRight>
+        <RecommendRight>
+          <MJLogin />
+          <MJSinger />
+          <MJHotAnchor />
+        </RecommendRight>
       </Content>
     </RecommendWraper>
   )
