@@ -8,6 +8,7 @@ import store from './store'
 
 import MJAppheader from "@/components/app-header"
 import MJAppFooter from "@/components/app-footer"
+import MJAppPlayerBar from "@/pages/player/app-player-bar"
 import { HashRouter } from 'react-router-dom'
 
 export default memo(function App() {
@@ -17,6 +18,8 @@ export default memo(function App() {
         <MJAppheader />
         {renderRoutes(routes)}
         <MJAppFooter />
+
+        <MJAppPlayerBar />
       </HashRouter>
     </Provider>
 

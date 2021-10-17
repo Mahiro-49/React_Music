@@ -10,6 +10,7 @@ import MJArtist from "@/pages/discover/c-pages/artist"
 import MJDiantai from "@/pages/discover/c-pages/diantai"
 import MJRanking from "@/pages/discover/c-pages/ranking"
 import MJSong from "@/pages/discover/c-pages/song"
+import MJPlayer from "@/pages/player"
 
 import { Redirect } from "react-router-dom"
 
@@ -57,6 +58,10 @@ const routes = [
         path: "/discovery/playlist",
         component: MJSong,
       },
+      {
+        path: "/discovery/player",
+        component: MJPlayer,
+      }
     ]
   },
   {
