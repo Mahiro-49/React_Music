@@ -208,9 +208,78 @@ const defaultState = Map({
       "mst": 9,
       "cp": 14026,
       "publishTime": 1461723397683
+    },
+    {
+      "name": "嚣张",
+      "id": 1382596189,
+      "pst": 0,
+      "t": 0,
+      "ar": [
+        {
+          "id": 32220939,
+          "name": "en",
+          "tns": [],
+          "alias": []
+        }
+      ],
+      "alia": [],
+      "pop": 100,
+      "st": 0,
+      "rt": "",
+      "fee": 8,
+      "v": 10,
+      "crbt": null,
+      "cf": "",
+      "al": {
+        "id": 80816891,
+        "name": "嚣张",
+        "picUrl": "https://p2.music.126.net/NhkuFBphLFaSmYMeW1-frQ==/109951164271814514.jpg",
+        "tns": [],
+        "pic_str": "109951164271814514",
+        "pic": 109951164271814510
+      },
+      "dt": 253994,
+      "h": {
+        "br": 320000,
+        "fid": 0,
+        "size": 10162605,
+        "vd": -55669
+      },
+      "m": {
+        "br": 192000,
+        "fid": 0,
+        "size": 6097581,
+        "vd": -53082
+      },
+      "l": {
+        "br": 128000,
+        "fid": 0,
+        "size": 4065069,
+        "vd": -51369
+      },
+      "a": null,
+      "cd": "01",
+      "no": 1,
+      "rtUrl": null,
+      "ftype": 0,
+      "rtUrls": [],
+      "djId": 0,
+      "copyright": 0,
+      "s_id": 0,
+      "mark": 0,
+      "originCoverType": 0,
+      "single": 0,
+      "noCopyrightRcmd": null,
+      "mv": 0,
+      "rtype": 0,
+      "rurl": null,
+      "mst": 9,
+      "cp": 1372818,
+      "publishTime": 0
     }
   ],
-  sequence: 0
+  sequence: 0,
+  lyricList: []
 });
 
 function reducer(state = defaultState, action) {
@@ -223,6 +292,8 @@ function reducer(state = defaultState, action) {
       return state.set("currentSongIndex", action.index);
     case actionTypes.CHANGE_SEQUENCE:
       return state.set("sequence", action.sequence);
+    case actionTypes.CHANGE_LYRIC_LIST:
+      return state.set("lyricList", action.lyricList);
     default:
       return state;
   }

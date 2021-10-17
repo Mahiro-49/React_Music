@@ -1,17 +1,20 @@
 import {
   getSongDetail,
+  getLyric
 } from "@/services/player"
 
 import * as actionTypes from "./constants"
+
+import {parseLyric} from "@/utils/parse-lyric"
 
 const changeCurrentSongAction = (currentSong) => ({
   type: actionTypes.CHANGE_CURRENT_SONG,
   currentSong,
 })
 
-const changeLyricAction = (Lyric) => ({
-  type: actionTypes.CHANGE_LYRIC,
-  Lyric
+const changeLyricAction = (lyricList) => ({
+  type: actionTypes.CHANGE_LYRIC_LIST,
+  lyricList
 })
 
 const changePlaylistAction = (playList) => ({
@@ -29,7 +32,7 @@ export const changeSequenceAction = (sequence) => ({
   sequence
 })
 
-export const changeCurrentSong = (tag) => {
+export const changeCurrentIndexAndSongAction = (tag) => {
   return (dispatch, getState) => {
     const playList = getState().getIn(["player", "playList"])
     const sequence = getState().getIn(["player", "sequence"])
@@ -52,6 +55,10 @@ export const changeCurrentSong = (tag) => {
     const currentSong = playList[currentSongIndex]
     dispatch(changeCurrentSongAction(currentSong))
     dispatch(changeCurrentSongIndexAction(currentSong))
+
+    // 请求歌词
+    dispatch(getLyricAction(currentSong.id))
+
   }
 }
 
@@ -62,14 +69,16 @@ export const getSongDetailAction = (ids) => {
     const songIndex = playList.findIndex(song => song.id === ids);
 
     // 2.判断是否找到歌曲
+    let song = null;
     if (songIndex !== -1) {   // 找到歌曲
       dispatch(changeCurrentSongIndexAction(songIndex));
-      const song = playList[songIndex];
+      song = playList[songIndex];
       dispatch(changeCurrentSongAction(song))
+      dispatch(getLyricAction(song.id))
     } else {   //没有找到歌曲
       // 请求歌曲数据
       getSongDetail(ids).then(res => {
-        const song = res.songs && res.songs[0]
+        song = res.songs && res.songs[0]
         if (!song) return;
 
         // 1.将最新请求的歌曲添加到播放列表中
@@ -80,10 +89,21 @@ export const getSongDetailAction = (ids) => {
         dispatch(changePlaylistAction(newPlaylist));
         dispatch(changeCurrentSongIndexAction(newPlaylist.length - 1));
         dispatch(changeCurrentSongAction(song))
+
+        // 3.请求该歌曲的歌词
+        dispatch(getLyricAction(song.id))
       })
-
     }
-
   }
 }
 
+export const getLyricAction = (id) => {
+  return dispatch => {
+    getLyric(id).then(res => {
+      const lyric = res.lrc.lyric
+      const lyricArry = parseLyric(lyric)
+      console.log(lyricArry);
+      dispatch(changeLyricAction(lyricArry))
+    })
+  }
+}

@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom"
 import { 
   getSongDetailAction, 
   changeSequenceAction,
-  changeCurrentSong
+  changeCurrentIndexAndSongAction
 } from "../store/actionCreator"
 
 import { getSizeImage, formatDate, getPlayUrl } from "@/utils/format-utils"
@@ -41,12 +41,17 @@ export default memo(function MJAppPlayerBar() {
 
   useEffect(() => {
     audioRef.current.src = getPlayUrl(currentSong.id)
+    audioRef.current.play().then(res => {
+      setIsPlaying(true)
+    }).catch(err => {
+      setIsPlaying(false)
+    })
   }, [currentSong])
 
   const audioRef = useRef()
 
   // 当al中有值再取里面的picUrl否则给默认值
-  const picUrl = (currentSong.al && currentSong.al.picUrl) || '';
+  const picUrl = currentSong.al ? currentSong.al.picUrl : '';
   const singerName = (currentSong.ar && currentSong.ar[0].name) || '';
   const duration = currentSong.dt || 0
   // 总时间处理
@@ -73,6 +78,16 @@ export default memo(function MJAppPlayerBar() {
       currentSequence = 0
     }
     dispatch(changeSequenceAction(currentSequence))
+  }
+
+  // 单曲循环
+  const handleMusicEnded = () => {
+    if(sequence === 2) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
+    }else {
+      dispatch(changeSequenceAction(1))
+    }
   }
 
   // 用useCallback只有当依赖的值发生改变才会发生重绘 传到自定义组件的时候用
@@ -102,10 +117,10 @@ export default memo(function MJAppPlayerBar() {
       <div className="content wrap-v2">
         <Control isPlaying={isPlaying}>
           <button className="sprite_player btn prev"
-                             onClick={e => dispatch(changeCurrentSong(1))}></button>
+                             onClick={e => dispatch(changeCurrentIndexAndSongAction(-1))}></button>
           <button className="sprite_player btn play" onClick={e => playMusic()}></button>
           <button className="sprite_player btn next" 
-                             onClick={e => dispatch(changeCurrentSong(1))}></button>
+                             onClick={e => dispatch(changeCurrentIndexAndSongAction(1))}></button>
         </Control>
         <PlayInfo>
           <div className="image">
@@ -143,7 +158,7 @@ export default memo(function MJAppPlayerBar() {
           </div>
         </Operator>
       </div>
-      <audio ref={audioRef} onTimeUpdate={timeUpdate} />
+      <audio ref={audioRef} onTimeUpdate={timeUpdate} onEnded={e => handleMusicEnded()} />
     </PlaybarWrapper>
   )
 })
