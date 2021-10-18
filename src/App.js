@@ -18,7 +18,6 @@ export default memo(function App() {
         <MJAppheader />
         {renderRoutes(routes)}
         <MJAppFooter />
-
         <MJAppPlayerBar />
       </HashRouter>
     </Provider>

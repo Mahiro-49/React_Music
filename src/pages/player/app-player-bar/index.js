@@ -22,6 +22,8 @@ import {
 
 import { Slider, message } from 'antd';
 
+import MJAppPlayerList from "../app-player-list"
+
 
 
 export default memo(function MJAppPlayerBar() {
@@ -29,6 +31,7 @@ export default memo(function MJAppPlayerBar() {
   const [progress, setProgress] = useState(0)
   const [isChange, setIsChange] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [isShowList, setIsShowList] = useState(false)
 
   const {
     currentSong,
@@ -184,11 +187,12 @@ export default memo(function MJAppPlayerBar() {
           <div className="right sprite_player">
             <button className="sprite_player btn volume"></button>
             <button className="sprite_player btn loop" onClick={e => changeSequence()}></button>
-            <button className="sprite_player btn playlist"></button>
+            <button className="sprite_player btn playlist" onClick={e => setIsShowList(!isShowList)}></button>
           </div>
         </Operator>
       </div>
       <audio ref={audioRef} onTimeUpdate={timeUpdate} onEnded={e => handleMusicEnded()} />
+      {isShowList && <MJAppPlayerList />}
     </PlaybarWrapper>
   )
 })
