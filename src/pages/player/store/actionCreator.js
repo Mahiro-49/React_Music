@@ -27,6 +27,14 @@ const changeCurrentSongIndexAction = (index) => ({
   index
 })
 
+<<<<<<< HEAD
+=======
+export const changeCurrentLyricIndexAction = (index) => ({
+  type: actionTypes.CHANGE_CURRENT_LYRIC_INDEX,
+  index
+})
+
+>>>>>>> a8c869f (歌词显示完成)
 export const changeSequenceAction = (sequence) => ({
   type: actionTypes.CHANGE_SEQUENCE,
   sequence
@@ -40,7 +48,11 @@ export const changeCurrentIndexAndSongAction = (tag) => {
 
     switch (sequence) {
       case 1: // 随机播放
+<<<<<<< HEAD
         let randomIndex = -1
+=======
+        let randomIndex = Math.floor(Math.random() * playList.length)
+>>>>>>> a8c869f (歌词显示完成)
         while (randomIndex === currentSongIndex) {
           randomIndex = Math.floor(Math.random() * playList.length)
         }

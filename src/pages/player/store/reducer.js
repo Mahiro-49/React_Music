@@ -279,7 +279,12 @@ const defaultState = Map({
     }
   ],
   sequence: 0,
+<<<<<<< HEAD
   lyricList: []
+=======
+  lyricList: [],
+  currentLyricIndex: 0
+>>>>>>> a8c869f (歌词显示完成)
 });
 
 function reducer(state = defaultState, action) {
@@ -294,6 +299,11 @@ function reducer(state = defaultState, action) {
       return state.set("sequence", action.sequence);
     case actionTypes.CHANGE_LYRIC_LIST:
       return state.set("lyricList", action.lyricList);
+<<<<<<< HEAD
+=======
+    case actionTypes.CHANGE_CURRENT_LYRIC_INDEX:
+      return state.set("currentLyricIndex", action.index);
+>>>>>>> a8c869f (歌词显示完成)
     default:
       return state;
   }

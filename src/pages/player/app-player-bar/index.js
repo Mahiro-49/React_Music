@@ -4,10 +4,18 @@ import { useDispatch, useSelector, shallowEqual } from "react-redux"
 
 import { NavLink } from "react-router-dom"
 
+<<<<<<< HEAD
 import { 
   getSongDetailAction, 
   changeSequenceAction,
   changeCurrentIndexAndSongAction
+=======
+import {
+  getSongDetailAction,
+  changeSequenceAction,
+  changeCurrentIndexAndSongAction,
+  changeCurrentLyricIndexAction
+>>>>>>> a8c869f (歌词显示完成)
 } from "../store/actionCreator"
 
 import { getSizeImage, formatDate, getPlayUrl } from "@/utils/format-utils"
@@ -19,7 +27,12 @@ import {
   Operator,
 } from "./style"
 
+<<<<<<< HEAD
 import { Slider } from 'antd';
+=======
+import { Slider, message, Button } from 'antd';
+
+>>>>>>> a8c869f (歌词显示完成)
 
 
 export default memo(function MJAppPlayerBar() {
@@ -28,9 +41,22 @@ export default memo(function MJAppPlayerBar() {
   const [isChange, setIsChange] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
 
+<<<<<<< HEAD
   const { currentSong, sequence } = useSelector(state => ({
     currentSong: state.getIn(["player", "currentSong"]),
     sequence: state.getIn(["player", "sequence"])
+=======
+  const {
+    currentSong,
+    sequence,
+    lyricList,
+    currentLyricIndex
+  } = useSelector(state => ({
+    currentSong: state.getIn(["player", "currentSong"]),
+    sequence: state.getIn(["player", "sequence"]),
+    lyricList: state.getIn(["player", "lyricList"]),
+    currentLyricIndex: state.getIn(["player", "currentLyricIndex"])
+>>>>>>> a8c869f (歌词显示完成)
   }), shallowEqual)
 
   const dispatch = useDispatch();
@@ -66,15 +92,47 @@ export default memo(function MJAppPlayerBar() {
   }, [isPlaying])
 
   const timeUpdate = (e) => {
+<<<<<<< HEAD
     if (!isChange) {
       setCurrentTime(e.target.currentTime * 1000)
       setProgress(currentTime / duration * 100)
     }
+=======
+    const currentTime = e.target.currentTime
+    if (!isChange) {
+      setCurrentTime(currentTime * 1000)
+      setProgress(currentTime * 1000 / duration * 100)
+    }
+
+    // 获取当前歌词
+    let i = 0
+    for (; i < lyricList.length; i++) {
+      let lyricItem = lyricList[i]
+      if (currentTime * 1000 < lyricItem.time) {
+        break;
+      }
+    }
+
+    if (currentLyricIndex !== i - 1) {
+      dispatch(changeCurrentLyricIndexAction(i - 1))
+      const content = lyricList[i - 1] && lyricList[i - 1].content
+      message.open({
+        key: "lyric",
+        content: content,
+        duration: 0
+      })
+    }
+
+>>>>>>> a8c869f (歌词显示完成)
   }
 
   const changeSequence = () => {
     let currentSequence = sequence + 1
+<<<<<<< HEAD
     if(currentSequence > 2) {
+=======
+    if (currentSequence > 2) {
+>>>>>>> a8c869f (歌词显示完成)
       currentSequence = 0
     }
     dispatch(changeSequenceAction(currentSequence))
@@ -82,10 +140,17 @@ export default memo(function MJAppPlayerBar() {
 
   // 单曲循环
   const handleMusicEnded = () => {
+<<<<<<< HEAD
     if(sequence === 2) {
       audioRef.current.currentTime = 0;
       audioRef.current.play();
     }else {
+=======
+    if (sequence === 2) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
+    } else {
+>>>>>>> a8c869f (歌词显示完成)
       dispatch(changeSequenceAction(1))
     }
   }
@@ -117,10 +182,17 @@ export default memo(function MJAppPlayerBar() {
       <div className="content wrap-v2">
         <Control isPlaying={isPlaying}>
           <button className="sprite_player btn prev"
+<<<<<<< HEAD
                              onClick={e => dispatch(changeCurrentIndexAndSongAction(-1))}></button>
           <button className="sprite_player btn play" onClick={e => playMusic()}></button>
           <button className="sprite_player btn next" 
                              onClick={e => dispatch(changeCurrentIndexAndSongAction(1))}></button>
+=======
+            onClick={e => dispatch(changeCurrentIndexAndSongAction(-1))}></button>
+          <button className="sprite_player btn play" onClick={e => playMusic()}></button>
+          <button className="sprite_player btn next"
+            onClick={e => dispatch(changeCurrentIndexAndSongAction(1))}></button>
+>>>>>>> a8c869f (歌词显示完成)
         </Control>
         <PlayInfo>
           <div className="image">
