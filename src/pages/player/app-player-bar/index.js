@@ -37,12 +37,14 @@ export default memo(function MJAppPlayerBar() {
     currentSong,
     sequence,
     lyricList,
-    currentLyricIndex
+    currentLyricIndex,
+    playList
   } = useSelector(state => ({
     currentSong: state.getIn(["player", "currentSong"]),
     sequence: state.getIn(["player", "sequence"]),
     lyricList: state.getIn(["player", "lyricList"]),
-    currentLyricIndex: state.getIn(["player", "currentLyricIndex"])
+    currentLyricIndex: state.getIn(["player", "currentLyricIndex"]),
+    playList: state.getIn(["player", "playList"])
   }), shallowEqual)
 
   const dispatch = useDispatch();
@@ -187,7 +189,7 @@ export default memo(function MJAppPlayerBar() {
           <div className="right sprite_player">
             <button className="sprite_player btn volume"></button>
             <button className="sprite_player btn loop" onClick={e => changeSequence()}></button>
-            <button className="sprite_player btn playlist" onClick={e => setIsShowList(!isShowList)}></button>
+            <button className="sprite_player btn playlist" onClick={e => setIsShowList(!isShowList)}>{playList.length}</button>
           </div>
         </Operator>
       </div>
