@@ -12,11 +12,12 @@ import {
 
 export default memo(function MJAppPlayerList() {
 
-  const { playList, currentSongIndex, lyricList, currentLyricIndex } = useSelector(state => ({
+  const { playList, currentSongIndex, lyricList, currentLyricIndex, currentSong } = useSelector(state => ({
     playList: state.getIn(["player", "playList"]),
     currentSongIndex: state.getIn(["player", "currentSongIndex"]),
     lyricList: state.getIn(["player", "lyricList"]),
-    currentLyricIndex: state.getIn(["player", "currentLyricIndex"])
+    currentLyricIndex: state.getIn(["player", "currentLyricIndex"]),
+    currentSong: state.getIn(["player", "currentSong"])
   }), shallowEqual)
 
   const panelRef = useRef()
@@ -37,7 +38,7 @@ export default memo(function MJAppPlayerList() {
           </div>
         </div>
         <div className="header-right">
-          <i className="title">{"你好"}</i>
+          <i className="title">{currentSong.name}</i>
           <i className="close">X</i>
         </div>
       </div>
