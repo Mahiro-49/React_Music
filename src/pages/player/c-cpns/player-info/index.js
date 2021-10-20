@@ -1,4 +1,4 @@
-import React, { memo,  } from 'react'
+import React, { memo, useState } from 'react'
 
 import { useSelector, shallowEqual } from "react-redux"
 
@@ -12,13 +12,16 @@ import {
 
 
 export default memo(function MJPlayerInfo() {
-  const { currentSong } = useSelector(state => ({
-    currentSong: state.getIn(["player", "currentSong"])
+  const [isOpen, setIsOpen] = useState(false)
+
+  const { currentSong, lyricList } = useSelector(state => ({
+    currentSong: state.getIn(["player", "currentSong"]),
+    lyricList: state.getIn(["player", "lyricList"])
   }), shallowEqual)
-  
+
 
   return (
-    <InfoWrapper>
+    <InfoWrapper isOpen={isOpen}>
       <div className="left">
         <div className="left-top">
           <img src={getSizeImage(currentSong.al.picUrl, 130)} alt="" />
@@ -43,6 +46,20 @@ export default memo(function MJPlayerInfo() {
           <a href="/#" className="name">{currentSong.ar[0].name}</a>
         </div>
         <MJPlayerDetailBar favor="收藏" share="分享" download="下载" comment="(13144)" />
+        <div className="lyric-list">
+          {
+            lyricList.map((item, index) => {
+              return (
+                <p key={item.time} className="list">{item.content}<br /></p>
+              )
+            })
+          }
+
+          <button className="lyric-button" onClick={e => setIsOpen(!isOpen)}>
+            {isOpen ? "收起" : "展开"}
+            <i className="sprite_icon2"></i>
+          </button>
+        </div>
       </div>
     </InfoWrapper>
   )

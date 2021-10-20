@@ -1,6 +1,7 @@
 import {
   getSongDetail,
-  getLyric
+  getLyric,
+  getSimPlayList
 } from "@/services/player"
 
 import * as actionTypes from "./constants"
@@ -27,6 +28,11 @@ const changeCurrentSongIndexAction = (index) => ({
   index
 })
 
+const changeSimPlayListAction = (simPlayList) => ({
+  type: actionTypes.CHANGE_SIM_PLAY_LIST,
+  simPlayList
+})
+ 
 export const changeCurrentLyricIndexAction = (index) => ({
   type: actionTypes.CHANGE_CURRENT_LYRIC_INDEX,
   index
@@ -107,8 +113,20 @@ export const getLyricAction = (id) => {
     getLyric(id).then(res => {
       const lyric = res.lrc.lyric
       const lyricArry = parseLyric(lyric)
-      console.log(lyricArry);
       dispatch(changeLyricAction(lyricArry))
+    })
+  }
+}
+
+export const getSimPlayListAction = () => {
+  return (dispatch, getState) => {
+    const id = getState().getIn(["player", "currentSong"]).id
+    if(!id) return
+
+    getSimPlayList(id).then(res => {
+      const simPlayList = res.playLists
+      console.log(res);
+      dispatch(changeSimPlayListAction(simPlayList))
     })
   }
 }

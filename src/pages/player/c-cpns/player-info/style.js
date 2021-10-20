@@ -73,5 +73,36 @@ export const InfoWrapper = styled.div`
         color: #0c73c2
       }
     }
+
+    .lyric-list {
+      margin-top: 50px;
+
+      .list {
+        display: block;
+        padding-top: 10px;
+      }
+      P:nth-child(n+13) {
+        display: ${props => props.isOpen ?  "initial" : "none"};
+      }
+
+      .lyric-button {
+        position: relative;
+        color: #0c73c2;
+        background-color: #fff;
+        text-decoration: underline;
+        cursor: pointer;
+
+        i {
+          position: absolute;
+          width: 11px;
+          height: 8px;
+          right: -10px;
+          top: 5px;
+          background-position: ${props => props.isOpen ? "-46px" : "-65px"} -520px;
+        }
+      }
+    }
+
+    
   }
 `
