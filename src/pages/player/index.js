@@ -20,8 +20,8 @@ export default memo(function MJPlayer() {
           <MJPlayerComment />
         </PlayerLeft>
         <PlayerRight>
-          <MJPlayerRelevant />
           <MJPlayerSongs />
+          <MJPlayerRelevant />
         </PlayerRight>
       </div>
     </PlaybarWrapper>
