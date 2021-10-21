@@ -131,7 +131,6 @@ export const getSimPlayListAction = () => {
 
     getSimPlayList(id).then(res => {
       const simPlayList = res.playlists
-      console.log(res);
       dispatch(changeSimPlayListAction(simPlayList))
     })
   }
@@ -143,6 +142,7 @@ export const getSimiSongAction = () => {
     if(!id) return
     getSimiSong(id).then(res => {
       const simiSong = res.songs
+      console.log(res);
       dispatch(changeSimiSongAction(simiSong))
     })
   }

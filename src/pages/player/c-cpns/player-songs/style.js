@@ -14,7 +14,7 @@ export const PlaySongWrapper = styled.div`
   .list-item {
     display: flex;
     margin-top: 20px;
-    img {
+    .image {
       width: 50px;
       height: 50px;
     }
