@@ -5,10 +5,10 @@ import { SongsCoverWrapper } from "./style"
 import { getCount, getSizeImage } from "@/utils/format-utils"
 
 export default memo(function MJSongsCover(props) {
-  const { info } = props
+  const { info, right } = props
 
   return (
-    <SongsCoverWrapper>
+    <SongsCoverWrapper right={right}>
       <div className="cover-top">
         <img src={getSizeImage(info.picUrl, 140)} alt=""/>
         <div className="cover sprite_cover">
@@ -25,7 +25,7 @@ export default memo(function MJSongsCover(props) {
         {info.name}
       </div>
       <div className="cover-source text-nowrap">
-        {/* by {info.copywriter || info.creator.nickname} */}
+        by {info.copywriter || info.creator.nickname}
       </div>
     </SongsCoverWrapper>
   )

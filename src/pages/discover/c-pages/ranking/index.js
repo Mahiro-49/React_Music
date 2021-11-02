@@ -17,7 +17,7 @@ export default memo(function MJRanking() {
   }, [dispatch])
 
   return (
-    <RankingWrapper className="wrap-v2">
+    <RankingWrapper className="wrap-v2 sprite_02">
       <Left>
         <MJTopRanking />
       </Left>
