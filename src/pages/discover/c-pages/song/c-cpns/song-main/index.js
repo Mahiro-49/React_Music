@@ -2,11 +2,11 @@ import React, { memo, useState } from 'react'
 
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
 
-import { getSongListAction } from '../../store/actionCreators'
-
 import { SongMainWrapper } from './style'
+import { getSongListAction } from "../../store/actionCreators";
 
 import MJSongsCover from '@/components/songs-cover'
+import MJPageNation from '@/components/pagenation'
 
 export default memo(function MJSongMain() {
   const [ currentPage, setCurrentPage ] = useState(1)
@@ -18,6 +18,12 @@ export default memo(function MJSongMain() {
 
   const songList = categorySongs.playlists || []
   const total = categorySongs.total || 0
+
+  function onPageChange(page) {
+    setCurrentPage(page)
+    dispatch(getSongListAction(page))
+  }
+
   return (
     <SongMainWrapper>
       <div className="songs-list">
@@ -28,6 +34,9 @@ export default memo(function MJSongMain() {
             )
           })
         }
+        <MJPageNation currentPage={currentPage}
+                      total={total}
+                      onPageChange={onPageChange}/>
       </div>
     </SongMainWrapper>
   )
